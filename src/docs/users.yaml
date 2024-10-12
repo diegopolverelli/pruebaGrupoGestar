@@ -1,0 +1,79 @@
+paths:
+  /users:
+    get:
+      summary: Retorna todos los usuarios.
+      tags:
+        - Users
+      description: Devuelve los usuarios del sistema.
+      responses:
+        "200": # status code
+          description: Un Json con la data de los usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404": # status code
+          description: No existen usuarios en el sistema
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: Crea un usuario.
+      tags:
+        - Users
+      description: Crea un usuario.
+      requestBody:
+        description: Datos del usuario
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201": # status code
+          description: Un Json con el nuevo usuario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRegistrado"
+              # schema:
+              #   type: array
+              #   items:
+              #     type: string
+        "400": # status code
+          description: Indica posibles errores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /users/{id}:
+    get:
+      summary: Lista un usuario por id.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id # Note the name is the same as in the path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Id del usuario a listar
+      responses:
+        "200": # status code
+          description: Un Json con el usuario seleccionado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRegistrado"
+        "401":
+          $ref: "#/components/responses/Unauthorized" # <-----
+        "404":
+          $ref: "#/components/responses/NotFound" # <-----
