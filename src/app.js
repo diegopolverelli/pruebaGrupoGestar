@@ -104,7 +104,7 @@ app.post("/users", async(req, res)=>{
 
 
 app.listen(PORT, ()=>{
-    console.log(`Server up in port ${PORT}...!!!`)
+    console.log(`Server up in port ${PORT}`)
 })
 
 conectarDB("mongodb+srv://fullstackgrupogestar:fullstackgrupogestar@cluster0.x5lje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", "pruebaTesting")
